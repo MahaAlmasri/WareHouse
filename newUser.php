@@ -1,6 +1,9 @@
 <?php 
-
+namespace WareHouse{
+require ('config.php');
 session_start();
+require_once('user.php');
+
 ?>
 
 <html lang="en">
@@ -43,15 +46,6 @@ session_start();
 if($_SERVER['REQUEST_METHOD']=='POST')
 {  
 
-$servername = "localhost";
-$username = "maha";
-$password = "317418";
-$dbname = "warehousedb";
-// Create connection
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
        
     $username = $_POST['name'];
     $password = $_POST['password']; 
@@ -71,27 +65,17 @@ try {
    }
   else
   {
-
-    $stmt = $conn->prepare("insert into users (username, password, email, usertype) values (:username, :password, :email , 'user')");
-    $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':password', password_hash($password,PASSWORD_DEFAULT));
-    $stmt->bindParam(':email', $email);
-
-
-    if ($stmt -> execute() === TRUE) {
+     $user=new User($username, $password, $email, 'user');
+      if ($user->insertUser()==true)
         echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+     else 
+        echo "Error ";
     }
     $conn=null;
 }
+
+
 }
-catch(PDOException $e)
-    {
-    echo "Connection failed: " . $e->getMessage();
-    }
-
-
-  }
+  
       
 ?>

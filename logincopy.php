@@ -1,10 +1,8 @@
 <?php 
 namespace WareHouse
 {
+require ('config.php');
 session_start();
-require_once ('config.php');
-use app\controllers;
-
 ?>
 
 <html lang="en">
@@ -52,13 +50,11 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 $stmt->bindParam(':username', $username);
 $stmt->execute();
 
-    if ($data = $stmt->fetch()) {
-        $verify=password_verify($password ,  $data['password']) ;
-    echo $verify;
-    if ( $verify ===true)
+    if ($data = $stmt->fetch()) 
+    if ( password_verify ( $password ,  $data['password']  ) ==true)
       echo "login succseed";
     else 
-        echo "invalid username or password";}
+        echo "invalid username or password";
 echo   $data['password'];
     $conn=null;
 }

@@ -4,7 +4,7 @@
 body {font-family: 'Bitter',Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
 
-input[type=text], select, textarea {
+input[type=text], select, textarea, input[type=password] {
   padding: 12px;
   border: 1px solid rgb(145, 2, 2);
   border-radius: 4px;
@@ -32,7 +32,10 @@ input[type=submit] {
   cursor: pointer;
 }
 
-
+table, th, td {
+  border: 1px solid rgb(145, 2, 2);
+  border-radius: 4px;
+}
 
 h1 {
    -webkit-text-stroke-width: 1px;
