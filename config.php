@@ -1,39 +1,31 @@
 <?php
 namespace WareHouse
 {
-
+use \PDO;
+require "vendor/autoload.php";
 class Connection{
 
-private $servername ;
-private $username ;
-private $password ;
-private $dbname ;
+private $servername ="localhost";
+private $username ="maha";
+private $password ="317418";
+private $dbname ="warehousedb";
 
+public $connection;
 
-public function __construct()
+ function __construct()
 {
-    $this->servername = "localhost";
-    $this->username = "maha";
-    $this->password = "317418";
-    $this->dbname = "warehousedb";
+    $this->connection = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
+    // set the PDO error mode to exception
+    $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
 
 }
-// Create connection
-public function createConnection()
+
+function __destruct()
 {
-try {
-    $conn = new \PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-    return $conn;
+    $this->connection=null;
 }
 
-catch(PDOException $e)
-{
-    echo "Connection failed: " . $e->getMessage();
-}
-}
 }
 }
 ?>

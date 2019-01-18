@@ -1,10 +1,9 @@
 <?php 
 namespace WareHouse
 {
+require "vendor/autoload.php";
 session_start();
-require_once ('config.php');
-use app\controllers;
-
+require_once('config.php');
 ?>
 
 <html lang="en">
@@ -44,16 +43,14 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 {  
     $username = $_POST['name'];
     $password = $_POST['password']; 
-    $connection = new Connection();
-    $conn=$connection->createConnection();
-
-    $stmt = $conn->prepare("select password from users where (userName=:username or email=:username)");
+    $conn = new Connection();
+    $stmt = $conn->connection->prepare("select password from users where (userName=:username or email=:username)");
     $stmt->bindParam(':username', $username);
     $stmt->execute();
 if ($stmt->rowCount()>0){
     if ($data = $stmt->fetch(\PDO::FETCH_OBJ)) {
     if (password_verify($password ,  $data->password))
-      echo "login succseed";
+    header('location: productlist.php');
     else 
         echo "invalid username or password";}
     }

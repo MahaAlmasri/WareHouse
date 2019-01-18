@@ -1,7 +1,8 @@
 <?php 
 namespace WareHouse
 {
-require_once ('config.php');
+ require "vendor/autoload.php";
+ require_once('product.php');
 session_start();
 ?>
 
@@ -21,6 +22,13 @@ session_start();
 table, th, td {
     border: 1px solid black;
 }
+.productDiv
+{
+  border: 1px solid rgb(145, 2, 2);
+  border-radius: 4px;
+  text-align: center;
+width:150px;
+}
 </style>
 
 </head>
@@ -30,16 +38,16 @@ table, th, td {
 </html>
 
 <?php
-
-    $stmt = $conn->prepare("SELECT * FROM products");
-    $stmt->execute();
+$pro=new Product();
+ $products= $pro->selectAll();
     // output data of each row
-    while($row = $stmt->fetch()) {
+    foreach( $products as $product )
+    {
              
-        echo "<h4>".$row["productName"]."</h4><br><h6>".$row["price"]."</h6><br><h5>".$row["description"]."</h5></br>";
+       echo "<div class='productDiv'> <h3>" . $product["productName"] . "</h3> <br> <h4>". $product["price"]. "<br>". $product["description"]. "</h4></div>" ;
     }
-    echo "</table>";
-    $conn=null;
+    
+
 
 
 }

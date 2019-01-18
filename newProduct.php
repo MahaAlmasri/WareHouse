@@ -1,8 +1,7 @@
 <?php 
 namespace WareHouse {
-require ('config.php');
+require "vendor/autoload.php";
 session_start();
-require_once('product.php');
 
 ?>
 
@@ -47,21 +46,19 @@ if($_SERVER['REQUEST_METHOD']=='POST')
     $amount = $_POST['amount'];
   
     $last_id=0;
-    $connection = new Connection();
-    $conn=$connection->createConnection();
-
+   
     $product=new Product($name, $price, $description, $amount);
     if ($product->insertProduct()===true)
       
         {
             $last_id = $conn->lastInsertId();
 
-     echo "New record created successfully";
+     echo "New Product created successfully";
     }
      else 
         echo "Error";
     
-    $conn=null;
+    
 
   
    }

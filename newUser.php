@@ -1,8 +1,8 @@
 <?php 
 namespace WareHouse{
-require ('config.php');
+require "vendor/autoload.php";
 session_start();
-require_once('user.php');
+
 
 ?>
 
@@ -51,7 +51,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
     $password = $_POST['password']; 
     $email = $_POST['email'];
     $password2 = $_POST['password2']; 
-
+    $error ="";
      
     if($password!=$password2) 
    {  
@@ -71,7 +71,6 @@ if($_SERVER['REQUEST_METHOD']=='POST')
      else 
         echo "Error ";
     }
-    $conn=null;
 }
 
 

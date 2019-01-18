@@ -1,7 +1,8 @@
 <?php
 namespace WareHouse
 {
-
+require "vendor/autoload.php";
+require_once('config.php');
 class Product
 {
     private $productId;
@@ -23,9 +24,9 @@ class Product
     {
         $this->productNmae=$_productNmae;
     }
-    public function getproductNmae()
+    public function getproductName()
     {
-        return $this->productNmae;
+        return $this->productName;
     }
 
     public function setprice($_price)
@@ -55,7 +56,7 @@ class Product
         return $this->amount;
     }
 
-    public function __construct( $_productNmae, $_price, $_description, $_amount)
+    public function __construct( $_productNmae="", $_price=0, $_description="", $_amount=0)
     {
 
         $this->productNmae=$_productNmae;
@@ -68,18 +69,24 @@ class Product
     {
        
 // Create connection
-    $connection = new Connection();
-    $conn=$connection->createConnection();
-
-        $stmt = $conn->prepare("insert into products (productName, price, description, amount) values (:productNmae, :price, :description , :amount)");
-        $stmt->bindParam(':productNmae', $this->getproductNmae());
+        $conn = new Connection();
+        $stmt = $conn->connection->prepare("insert into products (productName, price, description, amount) values (:productName, :price, :description , :amount)");
+        $stmt->bindParam(':productName', $this->getproductName());
         $stmt->bindParam(':price', $this->getprice());
         $stmt->bindParam(':description', $this->getdescription());
         $stmt->bindParam(':amount', $this->getAmount());
-    
-    
+       
         return $stmt -> execute() ;
     
+    }
+
+    public function selectAll()
+    {
+        $conn = new Connection();
+        $stmt = $conn->connection->prepare("SELECT * FROM products");
+        $stmt->execute();
+        return $stmt;
+           
     }
 }
 

@@ -64,7 +64,12 @@ left:0;
 right:auto;
 }
 
-
+.productDiv
+{
+  border: 1px solid rgb(145, 2, 2);
+  border-radius: 4px;
+text-align: center;
+}
 .dropdown-item 
 {
 background-color:#333;
