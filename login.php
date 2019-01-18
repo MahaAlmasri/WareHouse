@@ -44,22 +44,19 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 {  
     $username = $_POST['name'];
     $password = $_POST['password']; 
-    echo $password;
     $connection = new Connection();
     $conn=$connection->createConnection();
 
     $stmt = $conn->prepare("select password from users where (userName=:username or email=:username)");
-$stmt->bindParam(':username', $username);
-$stmt->execute();
-
-    if ($data = $stmt->fetch()) {
-        $verify=password_verify($password ,  $data['password']) ;
-    echo $verify;
-    if ( $verify ===true)
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+if ($stmt->rowCount()>0){
+    if ($data = $stmt->fetch(\PDO::FETCH_OBJ)) {
+    if (password_verify($password ,  $data->password))
       echo "login succseed";
     else 
         echo "invalid username or password";}
-echo   $data['password'];
+    }
     $conn=null;
 }
 } 
