@@ -1,9 +1,10 @@
 <?php 
 namespace WareHouse
 {
+    require "../vendor/autoload.php";
 
 session_start();
-require_once('config.php');
+require_once('../config.php');
 ?>
 
 <html lang="en">
@@ -14,7 +15,7 @@ require_once('config.php');
 
     <!-- Bootstrap CSS -->
    
-<link rel='stylesheet' href='./css/style.css'/>	
+<link rel='stylesheet' href='../css/style.css'/>	
 
 <title>Online WareHouse</title>
 
@@ -32,7 +33,7 @@ require_once('config.php');
     <input type="submit" value="Submit" name="submit"><br><br>
 
   </form>
-  <a href='newUser.php'>Add New Admin? </a></center> 
+  <a href='newAdmin.php'>Add New Admin? </a></center> 
 </body>
 </html>
 
@@ -44,7 +45,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
     $username = $_POST['name'];
     $password = $_POST['password']; 
     $conn = new Connection();
-    $stmt = $conn->connection->prepare("select password from users where (username=:username or email=:username) en usertype='admin'");
+    $stmt = $conn->connection->prepare("select password from users where ((username=:username or email=:username) and (usertype='admin'))");
     $stmt->bindParam(':username', $username);
     $stmt->execute();
 if ($stmt->rowCount()>0){

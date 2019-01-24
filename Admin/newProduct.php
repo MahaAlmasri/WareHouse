@@ -1,7 +1,9 @@
 <?php 
 namespace WareHouse {
-require_once('config.php');
-require_once('product.php');
+    require "../vendor/autoload.php";
+
+require_once('../config.php');
+require_once('../product.php');
 session_start();
 
 ?>
@@ -14,7 +16,7 @@ session_start();
 
     <!-- Bootstrap CSS -->
    
-<link rel='stylesheet' href='./css/style.css'/>	
+<link rel='stylesheet' href='../css/style.css'/>	
 
 <title>Online WareHouse</title>
 
@@ -52,9 +54,8 @@ if($_SERVER['REQUEST_METHOD']=='POST')
     if ($product->insertProduct()===true)
       
         {
-            $last_id = $conn->lastInsertId();
 
-     echo "New Product created successfully";
+            echo "New record created successfully";
     }
      else 
         echo "Error";

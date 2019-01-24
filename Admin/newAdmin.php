@@ -1,9 +1,9 @@
 <?php 
 namespace WareHouse{
-    require "../vendor/autoload.php";
+require "vendor/autoload.php";
 
 session_start();
-require_once('user.php')
+require_once('../user.php')
 
 ?>
 
@@ -15,7 +15,7 @@ require_once('user.php')
 
     <!-- Bootstrap CSS -->
    
-<link rel='stylesheet' href='./css/style.css'/>	
+<link rel='stylesheet' href='../css/style.css'/>	
 
 <title>Online WareHouse</title>
 
@@ -24,7 +24,7 @@ require_once('user.php')
   <h4> Create a New Account </h4>
 <form method="post" action="<?php echo($_SERVER['PHP_SELF']); ?>"> 
 <div>Already a Member? 
-<a href='login.php'>Sign in</a></div>
+<a href='Adminlogin.php'>Sign in</a></div>
     <label for="name"> Name</label><br>
     <input type="text" id="name" name="name" placeholder="Your name.." Required><br>
     <label for="password"> Password</label><br>
@@ -65,7 +65,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
    }
   else 
   {
-     $user=new User($username, $password, $email, 'user');
+     $user=new User($username, $password, $email, 'admin');
      
       if ($user->insertUser()==true)
         echo "New record created successfully";

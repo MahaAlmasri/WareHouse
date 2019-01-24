@@ -2,7 +2,8 @@
 
 namespace WareHouse
 {
- 
+    require "vendor/autoload.php";
+
     require_once('config.php');
 
 class User
@@ -13,41 +14,6 @@ class User
     private $email;
     private $userType;
 
-    public function setId($_id)
-    {
-        $this->id=$_id;
-    }
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setUsername($_username)
-    {
-        $this->username=$_username;
-    }
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    public function setPassword($_password)
-    {
-        $this->password=$_password;
-    }
-    public function getPassword()
-    {
-        return $this->password ;
-    }
-
-    public function setEmail($_email)
-    {
-        $this->email=$_email;
-    }
-    public function getEmail()
-    {
-        return $this->email;
-    }
     
     public function setUsertype($_usertype)
     {

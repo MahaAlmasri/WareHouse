@@ -3,6 +3,7 @@ namespace WareHouse
 {
  require "vendor/autoload.php";
  require_once('product.php');
+ require_once('config.php');
 session_start();
 ?>
 
@@ -71,7 +72,7 @@ $pro=new Product();
     foreach( $products as $product )
     {
              
-       echo "<div class='productDiv'> <h3>" . $product["productName"] . "</h3> <br> <h4>". $product["price"]. "<br>". $product["description"]. "</h4></div>" ;
+       echo "<div class='productDiv'> <h3>" . $product["name"] . "</h3> <br> <h4>". $product["price"]. "<br><br>". $product["description"]. "</h4></div>" ;
     }
     
 

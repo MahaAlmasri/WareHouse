@@ -1,6 +1,7 @@
 <?php 
 namespace WareHouse
 {
+    require "vendor/autoload.php";
 
 session_start();
 require_once('config.php');
