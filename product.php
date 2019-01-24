@@ -70,7 +70,7 @@ class Product
        
 // Create connection
         $conn = new Connection();
-        $stmt = $conn->connection->prepare("insert into products (productName, price, description, amount) values (:productName, :price, :description , :amount)");
+        $stmt = $conn->connection->prepare("insert into products (name, price, description, amount) values (:productName, :price, :description , :amount)");
         $stmt->bindParam(':productName', $this->getproductName());
         $stmt->bindParam(':price', $this->getprice());
         $stmt->bindParam(':description', $this->getdescription());

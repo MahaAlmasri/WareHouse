@@ -1,7 +1,7 @@
 <?php 
 namespace WareHouse
 {
-require "vendor/autoload.php";
+
 session_start();
 require_once('config.php');
 ?>
@@ -28,7 +28,7 @@ require_once('config.php');
     <input type="text" id="name" name="name" placeholder="Your username of email.." Required><br>
     <label for="password"> Password</label><br>
     <input type="password" id="password" name="password" placeholder="your password.." Required><br>
-
+    
     <input type="submit" value="Submit" name="submit"><br><br>
 
   </form>
@@ -44,7 +44,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
     $username = $_POST['name'];
     $password = $_POST['password']; 
     $conn = new Connection();
-    $stmt = $conn->connection->prepare("select password from users where (userName=:username or email=:username)");
+    $stmt = $conn->connection->prepare("select password from users where (username=:username or email=:username)");
     $stmt->bindParam(':username', $username);
     $stmt->execute();
 if ($stmt->rowCount()>0){

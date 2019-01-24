@@ -1,8 +1,8 @@
 <?php 
 namespace WareHouse{
-require "vendor/autoload.php";
-session_start();
 
+session_start();
+require_once('user.php')
 
 ?>
 
@@ -45,7 +45,6 @@ session_start();
 
 if($_SERVER['REQUEST_METHOD']=='POST')
 {  
-
        
     $username = $_POST['name'];
     $password = $_POST['password']; 
@@ -58,18 +57,18 @@ if($_SERVER['REQUEST_METHOD']=='POST')
     $error .= "<p>password doesn't match. </p>"; 
    }  
 
-   if (isset($error))  
+  if ($error!="")  
   {  
    // error afdrukken 
    echo $error . "<br />";  
    }
-  else
+  else 
   {
      $user=new User($username, $password, $email, 'user');
+     
       if ($user->insertUser()==true)
         echo "New record created successfully";
-     else 
-        echo "Error ";
+    
     }
 }
 

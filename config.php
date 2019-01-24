@@ -2,7 +2,7 @@
 namespace WareHouse
 {
 use \PDO;
-require "vendor/autoload.php";
+
 class Connection{
 
 private $servername ="localhost";

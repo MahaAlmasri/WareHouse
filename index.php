@@ -1,4 +1,4 @@
-<? 
-require "vendor/autoload.php";
-php include_once ("login.php");
+<?php
+require "vendor/autoload.php"; 
+include_once ("login.php");
  ?>

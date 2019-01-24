@@ -2,7 +2,7 @@
 
 namespace WareHouse
 {
-    require "vendor/autoload.php";
+ 
     require_once('config.php');
 
 class User
@@ -69,15 +69,16 @@ class User
 
     public function insertUser()
     {
-       
+       //password hashing
+       $pass=  password_hash( $this->password,PASSWORD_DEFAULT);
         // Create connection
         $conn= new Connection();
         
         $stmt = $conn->connection->prepare("insert into users (username, password, email, usertype) values (:username, :password, :email , :usertype)");
-        $stmt->bindParam(':username', $this->getUsername());
-        $stmt->bindParam(':password', password_hash($this->getPassword(),PASSWORD_DEFAULT));
-        $stmt->bindParam(':email', $this->getEmail());
-        $stmt->bindParam(':usertype', $this->getUsertype());
+        $stmt->bindParam(':username', $this->username);
+        $stmt->bindParam(':password', $pass);
+        $stmt->bindParam(':email',  $this->email);
+        $stmt->bindParam(':usertype', $this->userType);
      
         return $stmt -> execute() ;
     

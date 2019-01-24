@@ -1,8 +1,9 @@
 <?php 
 namespace WareHouse
 {
-require ('config.php');
+
 session_start();
+require_once('config.php');
 ?>
 
 <html lang="en">
@@ -27,11 +28,11 @@ session_start();
     <input type="text" id="name" name="name" placeholder="Your username of email.." Required><br>
     <label for="password"> Password</label><br>
     <input type="password" id="password" name="password" placeholder="your password.." Required><br>
-
+    
     <input type="submit" value="Submit" name="submit"><br><br>
 
   </form>
-  <a href='newUser.php'> New Customer? join free now </a></center> 
+  <a href='newUser.php'>Add New Admin? </a></center> 
 </body>
 </html>
 
@@ -42,20 +43,17 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 {  
     $username = $_POST['name'];
     $password = $_POST['password']; 
-    echo $password;
-    $connection = new Connection();
-    $conn=$connection->createConnection();
-
-    $stmt = $conn->prepare("select password from users where (userName=:username or email=:username)");
-$stmt->bindParam(':username', $username);
-$stmt->execute();
-
-    if ($data = $stmt->fetch()) 
-    if ( password_verify ( $password ,  $data['password']  ) ==true)
-      echo "login succseed";
+    $conn = new Connection();
+    $stmt = $conn->connection->prepare("select password from users where (username=:username or email=:username) en usertype='admin'");
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+if ($stmt->rowCount()>0){
+    if ($data = $stmt->fetch(\PDO::FETCH_OBJ)) {
+    if (password_verify($password ,  $data->password))
+    header('location: newProduct.php');
     else 
-        echo "invalid username or password";
-echo   $data['password'];
+        echo "invalid username or password";}
+    }
     $conn=null;
 }
 } 
