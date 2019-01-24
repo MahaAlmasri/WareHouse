@@ -4,7 +4,7 @@ namespace WareHouse
     require "../vendor/autoload.php";
 
 session_start();
-require_once('../config.php');
+require_once('../classes/config.php');
 ?>
 
 <html lang="en">

@@ -1,7 +1,7 @@
 <?php
 namespace WareHouse
 {
-require "vendor/autoload.php";
+
 require_once('config.php');
 class Product
 {

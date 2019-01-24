@@ -1,9 +1,9 @@
 <?php 
 namespace WareHouse{
-    require "../vendor/autoload.php";
+    require "vendor/autoload.php";
 
 session_start();
-require_once('user.php')
+require_once('classes/user.php')
 
 ?>
 

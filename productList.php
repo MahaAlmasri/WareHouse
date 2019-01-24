@@ -2,8 +2,8 @@
 namespace WareHouse
 {
  require "vendor/autoload.php";
- require_once('product.php');
- require_once('config.php');
+ require_once('./classes/product.php');
+ require_once('./classes/config.php');
 session_start();
 ?>
 
